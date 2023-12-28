@@ -64,7 +64,7 @@ namespace DB2VM
         }
 
         [HttpGet]
-        public string Get(string? BarCode, string? test, string? MRN)
+        public string Get(string? BarCode)
         {
          
             returnData returnData = new returnData();
@@ -112,6 +112,59 @@ namespace DB2VM
             }
        
           
+        }
+
+        [Route("order_by_code")]
+        [HttpGet]
+        public string Get_order_by_code(string? BarCode)
+        {
+
+            returnData returnData = new returnData();
+            try
+            {
+                string url = BarCode;
+                string barCode = GetContentI(url);
+                if (barCode.Contains("%C2%BA") || barCode.Contains("%EF%BF%BD"))
+                {
+                    barCode = barCode.Replace("%C2%BA", "");
+                    barCode = barCode.Replace("%EF%BF%BD", "");
+                }
+                if (barCode.Length < 26)
+                {
+                    returnData.Code = -200;
+                    returnData.Result = $"傳入資訊錯誤:{url}";
+                }
+                string 看病日期 = barCode.Substring(0, 8);
+                string year = 看病日期.Substring(0, 4);
+                string month = 看病日期.Substring(4, 2);
+                string day = 看病日期.Substring(6, 2);
+                看病日期 = $"{year}/{month}/{day}";
+                string 領藥號 = barCode.Substring(8, 5);
+                string 病歷號 = barCode.Substring(13, 7);
+                string 藥碼 = barCode.Substring(20, 6);
+
+                SQLControl sQLControl_醫囑資料 = new SQLControl(MySQL_server, MySQL_database, "order_list", MySQL_userid, MySQL_password, (uint)MySQL_port.StringToInt32(), MySql.Data.MySqlClient.MySqlSslMode.None);
+                List<object[]> list_醫囑資料 = new List<object[]>();
+                string[] serch_colName = new string[] { enum_醫囑資料.領藥號.GetEnumName(), enum_醫囑資料.病歷號.GetEnumName(), enum_醫囑資料.開方日期.GetEnumName() };
+                string[] serch_Value = new string[] { 領藥號, 病歷號, 看病日期 };
+                list_醫囑資料 = sQLControl_醫囑資料.GetRowsByDefult(null, serch_colName, serch_Value);
+                list_醫囑資料 = list_醫囑資料.GetRows((int)enum_醫囑資料.藥品碼, 藥碼);
+                List<OrderClass> orderClasses = list_醫囑資料.SQLToClass<OrderClass, enum_醫囑資料>();
+
+                returnData.Method = "barcode api";
+                returnData.Code = 200;
+                returnData.Data = orderClasses;
+                returnData.Result = $"藥單刷入成功!";
+                return returnData.JsonSerializationt(true);
+            }
+            catch (Exception e)
+            {
+                returnData.Code = -200;
+                returnData.Result = $"{e.Message}";
+                return returnData.JsonSerializationt(true);
+            }
+
+
         }
 
         [Route("order_update")]
