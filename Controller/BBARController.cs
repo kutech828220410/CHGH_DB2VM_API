@@ -134,116 +134,113 @@ namespace DB2VM
                 string 藥名 = "";
                 string url = BarCode;
                 string barCode = GetContentI(url);
-                if (barCode != null)
-                {
-                    if (barCode.Contains("%C2%BA") || barCode.Contains("%EF%BF%BD"))
-                    {
-                        barCode = barCode.Replace("%C2%BA", "");
-                        barCode = barCode.Replace("%EF%BF%BD", "");
-                    }
-                    if (barCode.Length < 26)
-                    {
-                        returnData.Code = -200;
-                        returnData.Result = $"傳入資訊錯誤:{url}";
-                    }
-                }
-                else
+                if(barCode == null)
                 {
                     string[] barcode_ary_temp = BarCode.Split("I=");
                     if (barcode_ary_temp.Length == 2)
                     {
-                        string PRI_KEY = $"{barcode_ary_temp[1]},{ DateTime.Now.ToDateString()}";
+                        barCode = barcode_ary_temp[1];
+                    }
+                }
+                string[] barcode_ary = barCode.Split(",");
+                if (barcode_ary.Length == 3)
+                {
+                    string PRI_KEY = $"{barCode},{ DateTime.Now.ToDateString()}";
+                    SQLControl sQLControl_UDSDBBCM = new SQLControl(MySQL_server, MySQL_database, "medicine_page_cloud", MySQL_userid, MySQL_password, (uint)MySQL_port.StringToInt32(), MySql.Data.MySqlClient.MySqlSslMode.None);
+                    List<object[]> list_藥檔資料 = sQLControl_UDSDBBCM.GetAllRows(null);
+                    List<object[]> list_藥檔資料_buf = new List<object[]>();
+                    string ty = barcode_ary[2].Substring(0, 1);
+                    string 住院序號 = barcode_ary[0].Substring(0, 7);
+                    string 藥局代碼 = "";
+                    藥碼 = barcode_ary[0].Substring(7, 6);
+                    string 頻次 = barcode_ary[1];
+                    int 消耗量 = barcode_ary[0].Substring(13, 3).StringToInt32() * -1;
+                    list_藥檔資料_buf = list_藥檔資料.GetRows((int)enum_藥品資料_藥檔資料.藥品碼, 藥碼);
+                    if (list_藥檔資料_buf.Count > 0)
+                    {
+                        藥名 = list_藥檔資料_buf[0][(int)enum_藥品資料_藥檔資料.藥品名稱].ObjectToString();
+                    }
+                    if (ty == "u")
+                    {
+                        藥局代碼 = "住院";
+                    }
+                    else if (ty == "p")
+                    {
+                        藥局代碼 = "領退";
+                    }
+                    else if (ty == "o")
+                    {
+                        藥局代碼 = "出院";
+                    }
+                    else
+                    {
+                        藥局代碼 = "化療";
+                    }
+                    string 開方日期 = DateTime.Now.ToDateTimeString();
+                    list_醫囑資料_buf = sQLControl_醫囑資料.GetRowsByDefult(null, (int)enum_醫囑資料.PRI_KEY, PRI_KEY);
+                    if (list_醫囑資料_buf.Count == 0)
+                    {
+                        object[] value = new object[new enum_醫囑資料().GetLength()];
+                        value[(int)enum_醫囑資料.GUID] = Guid.NewGuid().ToString();
+                        value[(int)enum_醫囑資料.PRI_KEY] = PRI_KEY;
+                        value[(int)enum_醫囑資料.藥局代碼] = 藥局代碼;
+                        value[(int)enum_醫囑資料.藥品碼] = 藥碼;
+                        value[(int)enum_醫囑資料.藥品名稱] = 藥名;
+                        value[(int)enum_醫囑資料.頻次] = 頻次;
+                        value[(int)enum_醫囑資料.病歷號] = "";
+                        value[(int)enum_醫囑資料.交易量] = 消耗量;
+                        value[(int)enum_醫囑資料.領藥號] = 住院序號;
+                        value[(int)enum_醫囑資料.病人姓名] = "";
+                        value[(int)enum_醫囑資料.開方日期] = 開方日期;
+                        value[(int)enum_醫囑資料.產出時間] = DateTime.Now.ToDateTimeString_6();
+                        value[(int)enum_醫囑資料.結方日期] = DateTime.MinValue.ToDateTimeString();
+                        value[(int)enum_醫囑資料.展藥時間] = DateTime.MinValue.ToDateTimeString();
+                        value[(int)enum_醫囑資料.過帳時間] = DateTime.MinValue.ToDateTimeString();
+                        value[(int)enum_醫囑資料.狀態] = enum_醫囑資料_狀態.未過帳.GetEnumName();
+                        list_醫囑資料_temp.Add(value);
+                        sQLControl_醫囑資料.AddRows(null, list_醫囑資料_temp);
+                    }
+                    else
+                    {
+                        object[] value = list_醫囑資料_buf[0];
+                        value[(int)enum_醫囑資料.PRI_KEY] = PRI_KEY;
+                        value[(int)enum_醫囑資料.藥局代碼] = 藥局代碼;
+                        value[(int)enum_醫囑資料.藥品碼] = 藥碼;
+                        value[(int)enum_醫囑資料.藥品名稱] = 藥名;
+                        value[(int)enum_醫囑資料.頻次] = 頻次;
+                        value[(int)enum_醫囑資料.病歷號] = "";
+                        value[(int)enum_醫囑資料.交易量] = 消耗量;
+                        value[(int)enum_醫囑資料.領藥號] = 住院序號;
+                        value[(int)enum_醫囑資料.病人姓名] = "";
+                        value[(int)enum_醫囑資料.開方日期] = 開方日期;
+                        value[(int)enum_醫囑資料.產出時間] = DateTime.Now.ToDateTimeString_6();
+                        value[(int)enum_醫囑資料.結方日期] = DateTime.MinValue.ToDateTimeString();
+                        value[(int)enum_醫囑資料.展藥時間] = DateTime.MinValue.ToDateTimeString();
+                        list_醫囑資料_temp.Add(value);
+                        sQLControl_醫囑資料.UpdateByDefulteExtra(null, list_醫囑資料_temp);
 
-                        string[] barcode_ary = barcode_ary_temp[1].Split(",");
-                        if(barcode_ary.Length == 3)
-                        {
-                            SQLControl sQLControl_UDSDBBCM = new SQLControl(MySQL_server, MySQL_database, "medicine_page_cloud", MySQL_userid, MySQL_password, (uint)MySQL_port.StringToInt32(), MySql.Data.MySqlClient.MySqlSslMode.None);
-                            List<object[]> list_藥檔資料 = sQLControl_UDSDBBCM.GetAllRows(null);
-                            List<object[]> list_藥檔資料_buf = new List<object[]>();
-                            string ty = barcode_ary[2].Substring(0, 1);
-                            string 住院序號 = barcode_ary[0].Substring(0, 7);
-                            string 藥局代碼 = "";
-                            藥碼 = barcode_ary[0].Substring(7, 6);
-                            string 頻次 = barcode_ary[1];
-                            int 消耗量 = barcode_ary[0].Substring(13, 3).StringToInt32() * -1;
-                            list_藥檔資料_buf = list_藥檔資料.GetRows((int)enum_藥品資料_藥檔資料.藥品碼, 藥碼);
-                            if (list_藥檔資料_buf.Count > 0)
-                            {
-                                藥名 = list_藥檔資料_buf[0][(int)enum_藥品資料_藥檔資料.藥品名稱].ObjectToString();
-                            }
-                            if (ty == "u")
-                            {
-                                藥局代碼 = "住院";
-                            }
-                            else if (ty == "p")
-                            {
-                                藥局代碼 = "領退";
-                            }
-                            else if (ty == "o")
-                            {
-                                藥局代碼 = "出院";
-                            }
-                            else
-                            {
-                                藥局代碼 = "化療";
-                            }
-                            string 開方日期 = DateTime.Now.ToDateTimeString();
-                            list_醫囑資料_buf = sQLControl_醫囑資料.GetRowsByDefult(null, (int)enum_醫囑資料.PRI_KEY, PRI_KEY);
-                            if (list_醫囑資料_buf.Count == 0)
-                            {
-                                object[] value = new object[new enum_醫囑資料().GetLength()];
-                                value[(int)enum_醫囑資料.GUID] = Guid.NewGuid().ToString();
-                                value[(int)enum_醫囑資料.PRI_KEY] = PRI_KEY;
-                                value[(int)enum_醫囑資料.藥局代碼] = 藥局代碼;
-                                value[(int)enum_醫囑資料.藥品碼] = 藥碼;
-                                value[(int)enum_醫囑資料.藥品名稱] = 藥名;
-                                value[(int)enum_醫囑資料.病歷號] = "";
-                                value[(int)enum_醫囑資料.交易量] = 消耗量;
-                                value[(int)enum_醫囑資料.領藥號] = 住院序號;
-                                value[(int)enum_醫囑資料.病人姓名] = "";
-                                value[(int)enum_醫囑資料.開方日期] = 開方日期;
-                                value[(int)enum_醫囑資料.產出時間] = DateTime.Now.ToDateTimeString_6();
-                                value[(int)enum_醫囑資料.結方日期] = DateTime.MinValue.ToDateTimeString();
-                                value[(int)enum_醫囑資料.展藥時間] = DateTime.MinValue.ToDateTimeString();
-                                value[(int)enum_醫囑資料.過帳時間] = DateTime.MinValue.ToDateTimeString();
-                                value[(int)enum_醫囑資料.狀態] = enum_醫囑資料_狀態.未過帳.GetEnumName();
-                                list_醫囑資料_temp.Add(value);
-                                sQLControl_醫囑資料.AddRows(null, list_醫囑資料_temp);
-                            }
-                            else
-                            {
-                                object[] value = list_醫囑資料_buf[0];
-                                value[(int)enum_醫囑資料.PRI_KEY] = PRI_KEY;
-                                value[(int)enum_醫囑資料.藥局代碼] = 藥局代碼;
-                                value[(int)enum_醫囑資料.藥品碼] = 藥碼;
-                                value[(int)enum_醫囑資料.藥品名稱] = 藥名;
-                                value[(int)enum_醫囑資料.病歷號] = "";
-                                value[(int)enum_醫囑資料.交易量] = 消耗量;
-                                value[(int)enum_醫囑資料.領藥號] = 住院序號;
-                                value[(int)enum_醫囑資料.病人姓名] = "";
-                                value[(int)enum_醫囑資料.開方日期] = 開方日期;
-                                value[(int)enum_醫囑資料.產出時間] = DateTime.Now.ToDateTimeString_6();
-                                value[(int)enum_醫囑資料.結方日期] = DateTime.MinValue.ToDateTimeString();
-                                value[(int)enum_醫囑資料.展藥時間] = DateTime.MinValue.ToDateTimeString();
-                                list_醫囑資料_temp.Add(value);
-                                sQLControl_醫囑資料.UpdateByDefulteExtra(null, list_醫囑資料_temp);
-
-                            }
-
-                            orderClasses = list_醫囑資料_temp.SQLToClass<OrderClass, enum_醫囑資料>();
-
-                            returnData.Method = "barcode api";
-                            returnData.Code = 200;
-                            returnData.Data = orderClasses;
-                            returnData.Result = $"藥單刷入成功!";
-                            return returnData.JsonSerializationt(true);
-                        }
                     }
 
-                    
+                    orderClasses = list_醫囑資料_temp.SQLToClass<OrderClass, enum_醫囑資料>();
+
+                    returnData.Method = "barcode api";
+                    returnData.Code = 200;
+                    returnData.Data = orderClasses;
+                    returnData.Result = $"藥單刷入成功!";
+                    return returnData.JsonSerializationt(true);
                 }
-               
-            
+                if (barCode.Contains("%C2%BA") || barCode.Contains("%EF%BF%BD"))
+                {
+                    barCode = barCode.Replace("%C2%BA", "");
+                    barCode = barCode.Replace("%EF%BF%BD", "");
+                }
+                if (barCode.Length < 26)
+                {
+                    returnData.Code = -200;
+                    returnData.Result = $"傳入資訊錯誤:{url}";
+                }
+
+
                 string 看病日期 = barCode.Substring(0, 8);
                 string year = 看病日期.Substring(0, 4);
                 string month = 看病日期.Substring(4, 2);
