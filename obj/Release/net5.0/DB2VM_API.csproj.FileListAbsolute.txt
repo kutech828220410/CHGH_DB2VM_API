@@ -887,3 +887,7 @@ C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\DB2VM_API.View
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\DB2VM_API.csproj.CopyComplete
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\DB2VM_API.pdb
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\DB2VM_API.genruntimeconfig.cache
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Release\net5.0\order_upate_ex\App.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Release\net5.0\order_upate_ex\bin\Debug\order_upate_ex.exe.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Release\net5.0\per_order_update\App.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Release\net5.0\per_order_update\bin\Debug\per_order_update.exe.config

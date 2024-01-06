@@ -878,3 +878,7 @@ C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\System.Data.OleD
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\VfpClient.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Data.OleDb.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\dBASE.NET.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\order_upate_ex\App.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\order_upate_ex\bin\Debug\order_upate_ex.exe.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\per_order_update\App.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\per_order_update\bin\Debug\per_order_update.exe.config

@@ -14,6 +14,8 @@ using System.Text;
 using HIS_DB_Lib;
 using System.Xml;
 using System.Text.Json.Serialization;
+using MySql.Data.MySqlClient;
+
 namespace DB2VM.Controller
 {
    
@@ -22,6 +24,8 @@ namespace DB2VM.Controller
     [ApiController]
     public class BBCMController : ControllerBase
     {
+        static private string API_Server = "http://127.0.0.1:4433/api/serversetting";
+        static private MySqlSslMode SSLMode = MySqlSslMode.None;
         public class MsgClass
         {
             [JsonPropertyName("ReturnCode")]
@@ -111,6 +115,7 @@ namespace DB2VM.Controller
                     list_value.Add(value);
                     sQLControl_UDSDBBCM.UpdateByDefulteExtra(null, list_value);
                 }
+                Function_更新各台藥檔資料(medClass);
             }
             List<medClass> medClasses = new List<medClass>();
             if(medClass == null)
@@ -121,12 +126,46 @@ namespace DB2VM.Controller
             {
                 medClasses.Add(medClass);
             }
+
+
+
             returnData returnData = new returnData();
             returnData.Code = 200;
             returnData.Result = "取得藥品檔成功!";
             returnData.Data = medClasses;
 
             return $"{returnData.JsonSerializationt(true)}";
+        }
+        private void Function_更新各台藥檔資料(medClass medClass)
+        {
+            if (medClass == null) return;
+
+            string url = $"{API_Server}";
+
+            List<ServerSettingClass> serverSettingClasses = ServerSettingClassMethod.WebApiGet($"{API_Server}");
+            serverSettingClasses = (from temp in serverSettingClasses
+                                    where temp.類別 == "調劑台"
+                                    where temp.內容 == "一般資料"
+                                    select temp).ToList();
+            SQLControl sQLControl_藥檔資料;
+
+            for (int i = 0; i < serverSettingClasses.Count; i++)
+            {
+                string Server = serverSettingClasses[i].Server;
+                string DBName = serverSettingClasses[i].DBName;
+                string User = serverSettingClasses[i].User;
+                string Password = serverSettingClasses[i].Password;
+                string Port = serverSettingClasses[i].Port;
+                sQLControl_藥檔資料 = new SQLControl(Server, DBName, "medicine_page", User, Password, (uint)Port.StringToInt32(), MySql.Data.MySqlClient.MySqlSslMode.None);
+                List<object[]> list_藥檔資料 = sQLControl_藥檔資料.GetRowsByDefult(null , (int)enum_藥品資料_藥檔資料.藥品碼, medClass.藥品碼);
+                if(list_藥檔資料.Count == 0)
+                {
+                    object[] value = medClass.ClassToSQL<medClass, enum_藥品資料_藥檔資料>();
+                    sQLControl_藥檔資料.AddRow(null, value);
+                }
+
+            }
+
         }
     }
 }

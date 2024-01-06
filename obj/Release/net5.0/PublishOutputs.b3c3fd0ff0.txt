@@ -39,6 +39,10 @@ C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\app
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\med_update\App.config
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\med_update\bin\Debug\med_update.exe.config
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\med_update\bin\Release\med_update.exe.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\order_upate_ex\App.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\order_upate_ex\bin\Debug\order_upate_ex.exe.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\per_order_update\App.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\per_order_update\bin\Debug\per_order_update.exe.config
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\web.config
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\appsettings.Development.json
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\appsettings.json
