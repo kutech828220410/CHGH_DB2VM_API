@@ -75,7 +75,7 @@ namespace DB2VM.Controller
             soap.Append("</MedData>");
             soap.Append("</soap:Body>");
             soap.Append("</soap:Envelope>");
-            string Xml = Basic.Net.WebServicePost("https://phamedtestws.chgh.org.tw/PHAMEDWebService.asmx?op=MedData", soap);
+            string Xml = Basic.Net.WebServicePost("https://phamedws.chgh.org.tw/PHAMEDWebService.asmx?op=MedData", soap);
             string[] Node_array = new string[] { "soap:Body", "MedDataResponse"};
             XmlElement xmlElement = Xml.Xml_GetElement(Node_array);
             string json = xmlElement.Xml_GetInnerXml("MedDataResult");

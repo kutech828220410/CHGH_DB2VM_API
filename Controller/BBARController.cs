@@ -199,6 +199,13 @@ namespace DB2VM
                 string[] serch_colName = new string[] { enum_醫囑資料.領藥號.GetEnumName(), enum_醫囑資料.病歷號.GetEnumName(), enum_醫囑資料.開方日期.GetEnumName() };
                 string[] serch_Value = new string[] { 領藥號, 病歷號, 看病日期 };
                 list_醫囑資料 = sQLControl_醫囑資料.GetRowsByDefult(null, serch_colName, serch_Value);
+                if(list_醫囑資料.Count == 0)
+                {
+                    領藥號 = $"7{領藥號}";
+                    serch_colName = new string[] { enum_醫囑資料.領藥號.GetEnumName(), enum_醫囑資料.病歷號.GetEnumName(), enum_醫囑資料.開方日期.GetEnumName() };
+                    serch_Value = new string[] { 領藥號, 病歷號, 看病日期 };
+                    list_醫囑資料 = sQLControl_醫囑資料.GetRowsByDefult(null, serch_colName, serch_Value);
+                }
                 orderClasses = list_醫囑資料.SQLToClass<OrderClass , enum_醫囑資料>();
 
                 returnData.Method = "barcode api";
@@ -358,6 +365,14 @@ namespace DB2VM
                 string[] serch_Value = new string[] { 領藥號, 病歷號, 看病日期 };
                 list_醫囑資料 = sQLControl_醫囑資料.GetRowsByDefult(null, serch_colName, serch_Value);
                 list_醫囑資料 = list_醫囑資料.GetRows((int)enum_醫囑資料.藥品碼, 藥碼);
+                if (list_醫囑資料.Count == 0)
+                {
+                    領藥號 = $"7{領藥號}";
+                    serch_colName = new string[] { enum_醫囑資料.領藥號.GetEnumName(), enum_醫囑資料.病歷號.GetEnumName(), enum_醫囑資料.開方日期.GetEnumName() };
+                    serch_Value = new string[] { 領藥號, 病歷號, 看病日期 };
+                    list_醫囑資料 = sQLControl_醫囑資料.GetRowsByDefult(null, serch_colName, serch_Value);
+                    list_醫囑資料 = list_醫囑資料.GetRows((int)enum_醫囑資料.藥品碼, 藥碼);
+                }
                 orderClasses = list_醫囑資料.SQLToClass<OrderClass, enum_醫囑資料>();
 
                 returnData.Method = "barcode api";
