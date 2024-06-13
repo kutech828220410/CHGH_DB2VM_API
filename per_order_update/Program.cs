@@ -7,9 +7,8 @@ using System.Configuration;
 using Basic;
 using SQLUI;
 using HIS_DB_Lib;
-using dBASE.NET;
 using System.Threading;
-
+using System.Data.OleDb;
 namespace per_order_update
 {
     class Program
@@ -43,32 +42,72 @@ namespace per_order_update
 
                 while (true)
                 {
-                
+                    Console.WriteLine($"---------------------------------------------------------------------");
+                    List<object[]> list_src_order = new List<object[]>();
+                    MyTimerBasic myTimerBasic = new MyTimerBasic(50000);
+                    string dbfFilePath = @"Y:\DRUG.DBF"; // 替換成你的 DBF 檔案路徑
+                    DataTable dataTable = null;
+                    // 設定連接字串
+                    string connectionString = $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={System.IO.Path.GetDirectoryName(dbfFilePath)};Extended Properties=dBASE IV;";
+                    using (OleDbConnection connection = new OleDbConnection(connectionString))
+                    {
+                        try
+                        {
+                            // 開啟連接
+                            connection.Open();
+
+                            // 執行 SQL 查詢
+                            string sqlQuery = "SELECT * FROM " + System.IO.Path.GetFileNameWithoutExtension(dbfFilePath);
+                            using (OleDbCommand command = new OleDbCommand(sqlQuery, connection))
+                            {
+                                using (OleDbDataAdapter adapter = new OleDbDataAdapter(command))
+                                {
+                                    dataTable = new DataTable();
+                                    adapter.Fill(dataTable);
+
+                                    // 輸出資料到控制台
+                                    foreach (DataRow row in dataTable.Rows)
+                                    {
+                                        object[] value = new object[dataTable.Columns.Count];
+                                        for (int i = 0; i < dataTable.Columns.Count; i++)
+                                        {
+                                            value[i] = row[i];
+                                        }
+                                        list_src_order.Add(value);
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("讀取資料時發生錯誤：" + ex.Message);
+                        }
+                    }
                     try
                     {
-                        Console.WriteLine($"---------------------------------------------------------------------");
-                        MyTimerBasic myTimerBasic = new MyTimerBasic(50000);
-                        myTimerBasic.StartTickTime();
-                        string src_path = @"phr08\ud_bag";
-                        string stc_filename = @"DRUG.DBF";
-                        string dst_path = @"C://";
-                        string dst_filename = @"PRE_DRUG_OPD.DBF";
-                        Basic.FileIO.ServerFileCopy(src_path, stc_filename, dst_path, dst_filename, "user9", "win9");
-                        Dbf dbf = new Dbf();
-                        System.Text.EncodingInfo[] encodingInfos = System.Text.Encoding.GetEncodings();
-                        dbf.Encoding = System.Text.Encoding.GetEncoding("BIG5");
-                        dbf.Read($@"{dst_path}{dst_filename}");
-                        List<object[]> list_src_order = new List<object[]>();
+                        //Console.WriteLine($"---------------------------------------------------------------------");
+                        //MyTimerBasic myTimerBasic = new MyTimerBasic(50000);
+                        //myTimerBasic.StartTickTime();
+                        //string src_path = @"phr08\ud_bag";
+                        //string stc_filename = @"DRUG.DBF";
+                        //string dst_path = @"C://";
+                        //string dst_filename = @"PRE_DRUG_OPD.DBF";
+                        //Basic.FileIO.ServerFileCopy(src_path, stc_filename, dst_path, dst_filename, "user9", "win9");
+                        //Dbf dbf = new Dbf();
+                        //System.Text.EncodingInfo[] encodingInfos = System.Text.Encoding.GetEncodings();
+                        //dbf.Encoding = System.Text.Encoding.GetEncoding("BIG5");
+                        //dbf.Read($@"{dst_path}{dst_filename}");
+                        //List<object[]> list_src_order = new List<object[]>();
 
-                        foreach (DbfRecord record in dbf.Records)
-                        {
-                            object[] value = new object[dbf.Fields.Count];
-                            for (int i = 0; i < dbf.Fields.Count; i++)
-                            {
-                                value[i] = record[i];
-                            }
-                            list_src_order.Add(value);
-                        }
+                        //foreach (DbfRecord record in dbf.Records)
+                        //{
+                        //    object[] value = new object[dbf.Fields.Count];
+                        //    for (int i = 0; i < dbf.Fields.Count; i++)
+                        //    {
+                        //        value[i] = record[i];
+                        //    }
+                        //    list_src_order.Add(value);
+                        //}
                         list_src_order = (from temp in list_src_order
                                           where temp[(int)enum_門診處方.病歷號].ObjectToString().StringIsEmpty() == false
                                           select temp).ToList();
@@ -104,8 +143,9 @@ namespace per_order_update
                         dateTime_st = new DateTime(dateTime_st.Year, dateTime_st.Month, dateTime_st.Day, 00, 00, 00);
                         DateTime dateTime_end = DateTime.Now.AddDays(4);
                         dateTime_end = new DateTime(dateTime_end.Year, dateTime_end.Month, dateTime_end.Day, 23, 59, 59);
-
-                        List<object[]> list_order = sQLControl_醫囑資料.GetRowsByBetween(null, (int)enum_醫囑資料.開方日期, dateTime_st.ToDateTimeString(), dateTime_end.ToDateTimeString());
+                        string str_start = dateTime_st.ToDateTimeString();
+                        string str_end = dateTime_end.ToDateTimeString();
+                        List<object[]> list_order = sQLControl_醫囑資料.GetRowsByBetween(null, (int)enum_醫囑資料.開方日期, str_start, str_end);
                         List<object[]> list_order_buf = new List<object[]>();
                         List<object[]> list_order_add = new List<object[]>();
                         Console.WriteLine($"從資料庫讀取處方資料,共<{list_order.Count}>筆...,{myTimerBasic}");
