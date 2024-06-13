@@ -639,7 +639,6 @@ C:\Users\HS\Source\Repos\TPH_DBVM_API\obj\Debug\net5.0\ref\DB2VM_API.dll
 C:\Users\HS\Source\Repos\TPH_DBVM_API\obj\Debug\net5.0\DB2VM_API.pdb
 C:\Users\HS\Source\Repos\TPH_DBVM_API\obj\Debug\net5.0\DB2VM_API.genruntimeconfig.cache
 C:\Users\Administrator\Source\Repos\TPH_DBVM_API\bin\Debug\net5.0\HIS_DB_Lib.dll
-C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Debug\net5.0\DB2VM_API.csproj.AssemblyReference.cache
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Debug\net5.0\DB2VM_API.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Debug\net5.0\DB2VM_API.AssemblyInfoInputs.cache
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Debug\net5.0\DB2VM_API.AssemblyInfo.cs
@@ -882,3 +881,11 @@ C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\order_upate_ex\A
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\order_upate_ex\bin\Debug\order_upate_ex.exe.config
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\per_order_update\App.config
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\per_order_update\bin\Debug\per_order_update.exe.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\order_ud_update\App.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\order_ud_update\bin\Debug\order_ud_update.exe.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\order_ud_update\bin\Debug\order_upate_ex.exe.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\H_Pannel_lib.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\zxing.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\bin\Debug\net5.0\stdole.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Debug\net5.0\DB2VM_API.csproj.AssemblyReference.cache

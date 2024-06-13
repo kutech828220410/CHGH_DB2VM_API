@@ -93,13 +93,16 @@ namespace DB2VM
                 string[] barcode_ary = barCode.Split(",");
                 if (barcode_ary.Length == 3)
                 {
-                    string PRI_KEY = $"{barCode},{ DateTime.Now.ToDateString()}";
+                    
                     SQLControl sQLControl_UDSDBBCM = new SQLControl(MySQL_server, MySQL_database, "medicine_page_cloud", MySQL_userid, MySQL_password, (uint)MySQL_port.StringToInt32(), MySql.Data.MySqlClient.MySqlSslMode.None);
                     List<object[]> list_藥檔資料 = sQLControl_UDSDBBCM.GetAllRows(null);
                     List<object[]> list_藥檔資料_buf = new List<object[]>();
                     string ty = barcode_ary[2].Substring(0, 1);
+                    string PRI_KEY = $"{barCode},{ DateTime.Now.ToDateString()}";
                     string 住院序號 = barcode_ary[0].Substring(0, 7);
                     string 藥局代碼 = "";
+                    string[] str_temp = barcode_ary[2].Split(";");
+                    string 領藥號_temp = str_temp[0].Substring(str_temp[0].Length - 4, 4);
                     藥碼 = barcode_ary[0].Substring(7, 6);
                     string 頻次 = barcode_ary[1];
                     int 消耗量 = barcode_ary[0].Substring(13, 3).StringToInt32() * -1;
@@ -108,9 +111,20 @@ namespace DB2VM
                     {
                         藥名 = list_藥檔資料_buf[0][(int)enum_藥品資料_藥檔資料.藥品名稱].ObjectToString();
                     }
+
                     if (ty == "u")
                     {
                         藥局代碼 = "住院";
+                        PRI_KEY = $"{藥碼},{藥局代碼},{領藥號_temp},{消耗量 * -1 },{DateTime.Now.ToDateString()}";
+                        list_醫囑資料_buf = sQLControl_醫囑資料.GetRowsByDefult(null, (int)enum_醫囑資料.PRI_KEY, PRI_KEY);
+              
+                        orderClasses = list_醫囑資料_buf.SQLToClass<OrderClass, enum_醫囑資料>();
+
+                        returnData.Method = "barcode api";
+                        returnData.Code = 200;
+                        returnData.Data = orderClasses;
+                        returnData.Result = $"藥單刷入成功!";
+                        return returnData.JsonSerializationt(true);
                     }
                     else if (ty == "p")
                     {
@@ -137,7 +151,7 @@ namespace DB2VM
                         value[(int)enum_醫囑資料.頻次] = 頻次;
                         value[(int)enum_醫囑資料.病歷號] = 住院序號;
                         value[(int)enum_醫囑資料.交易量] = 消耗量;
-                        value[(int)enum_醫囑資料.領藥號] = 住院序號;
+                        value[(int)enum_醫囑資料.領藥號] = 領藥號_temp;
                         value[(int)enum_醫囑資料.病人姓名] = "";
                         value[(int)enum_醫囑資料.開方日期] = 開方日期;
                         value[(int)enum_醫囑資料.產出時間] = DateTime.Now.ToDateTimeString_6();
@@ -158,7 +172,7 @@ namespace DB2VM
                         value[(int)enum_醫囑資料.頻次] = 頻次;
                         value[(int)enum_醫囑資料.病歷號] = 住院序號;
                         value[(int)enum_醫囑資料.交易量] = 消耗量;
-                        value[(int)enum_醫囑資料.領藥號] = 住院序號;
+                        value[(int)enum_醫囑資料.領藥號] = 領藥號_temp;
                         value[(int)enum_醫囑資料.病人姓名] = "";
                         value[(int)enum_醫囑資料.開方日期] = 開方日期;
                         value[(int)enum_醫囑資料.產出時間] = DateTime.Now.ToDateTimeString_6();
@@ -176,6 +190,7 @@ namespace DB2VM
                     returnData.Data = orderClasses;
                     returnData.Result = $"藥單刷入成功!";
                     return returnData.JsonSerializationt(true);
+
                 }
                 if (barCode.Contains("%C2%BA") || barCode.Contains("%EF%BF%BD"))
                 {
@@ -255,13 +270,15 @@ namespace DB2VM
                 string[] barcode_ary = barCode.Split(",");
                 if (barcode_ary.Length == 3)
                 {
-                    string PRI_KEY = $"{barCode},{ DateTime.Now.ToDateString()}";
                     SQLControl sQLControl_UDSDBBCM = new SQLControl(MySQL_server, MySQL_database, "medicine_page_cloud", MySQL_userid, MySQL_password, (uint)MySQL_port.StringToInt32(), MySql.Data.MySqlClient.MySqlSslMode.None);
                     List<object[]> list_藥檔資料 = sQLControl_UDSDBBCM.GetAllRows(null);
                     List<object[]> list_藥檔資料_buf = new List<object[]>();
                     string ty = barcode_ary[2].Substring(0, 1);
+                    string PRI_KEY = $"{barCode},{ DateTime.Now.ToDateString()}";
                     string 住院序號 = barcode_ary[0].Substring(0, 7);
                     string 藥局代碼 = "";
+                    string[] str_temp = barcode_ary[2].Split(";");
+                    string 領藥號_temp = str_temp[0].Substring(str_temp[0].Length - 4, 4);
                     藥碼 = barcode_ary[0].Substring(7, 6);
                     string 頻次 = barcode_ary[1];
                     int 消耗量 = barcode_ary[0].Substring(13, 3).StringToInt32() * -1;
@@ -270,9 +287,21 @@ namespace DB2VM
                     {
                         藥名 = list_藥檔資料_buf[0][(int)enum_藥品資料_藥檔資料.藥品名稱].ObjectToString();
                     }
+
+
                     if (ty == "u")
                     {
                         藥局代碼 = "住院";
+                        PRI_KEY = $"{藥碼},{藥局代碼},{領藥號_temp},{消耗量 * -1 },{DateTime.Now.ToDateString()}";
+                        list_醫囑資料_buf = sQLControl_醫囑資料.GetRowsByDefult(null, (int)enum_醫囑資料.PRI_KEY, PRI_KEY);
+
+                        orderClasses = list_醫囑資料_buf.SQLToClass<OrderClass, enum_醫囑資料>();
+
+                        returnData.Method = "barcode api";
+                        returnData.Code = 200;
+                        returnData.Data = orderClasses;
+                        returnData.Result = $"藥單刷入成功!";
+                        return returnData.JsonSerializationt(true);
                     }
                     else if (ty == "p")
                     {
@@ -299,7 +328,7 @@ namespace DB2VM
                         value[(int)enum_醫囑資料.頻次] = 頻次;
                         value[(int)enum_醫囑資料.病歷號] = 住院序號;
                         value[(int)enum_醫囑資料.交易量] = 消耗量;
-                        value[(int)enum_醫囑資料.領藥號] = 住院序號;
+                        value[(int)enum_醫囑資料.領藥號] = 領藥號_temp;
                         value[(int)enum_醫囑資料.病人姓名] = "";
                         value[(int)enum_醫囑資料.開方日期] = 開方日期;
                         value[(int)enum_醫囑資料.產出時間] = DateTime.Now.ToDateTimeString_6();
@@ -320,7 +349,7 @@ namespace DB2VM
                         value[(int)enum_醫囑資料.頻次] = 頻次;
                         value[(int)enum_醫囑資料.病歷號] = 住院序號;
                         value[(int)enum_醫囑資料.交易量] = 消耗量;
-                        value[(int)enum_醫囑資料.領藥號] = 住院序號;
+                        value[(int)enum_醫囑資料.領藥號] = 領藥號_temp;
                         value[(int)enum_醫囑資料.病人姓名] = "";
                         value[(int)enum_醫囑資料.開方日期] = 開方日期;
                         value[(int)enum_醫囑資料.產出時間] = DateTime.Now.ToDateTimeString_6();
@@ -338,6 +367,7 @@ namespace DB2VM
                     returnData.Data = orderClasses;
                     returnData.Result = $"藥單刷入成功!";
                     return returnData.JsonSerializationt(true);
+
                 }
                 if (barCode.Contains("%C2%BA") || barCode.Contains("%EF%BF%BD"))
                 {

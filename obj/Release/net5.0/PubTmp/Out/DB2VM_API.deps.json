@@ -1016,11 +1016,27 @@
           }
         }
       },
+      "Newtonsoft.Json/13.0.0.0": {
+        "runtime": {
+          "Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.25517"
+          }
+        }
+      },
       "Interop.SpeechLib/5.4.0.0": {
         "runtime": {
           "Interop.SpeechLib.dll": {
             "assemblyVersion": "5.4.0.0",
             "fileVersion": "5.4.0.0"
+          }
+        }
+      },
+      "H_Pannel_lib/1.0.0.0": {
+        "runtime": {
+          "H_Pannel_lib.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -1128,6 +1144,14 @@
           }
         }
       },
+      "zxing/0.16.6.0": {
+        "runtime": {
+          "zxing.dll": {
+            "assemblyVersion": "0.16.6.0",
+            "fileVersion": "0.16.6.0"
+          }
+        }
+      },
       "office/15.0.0.0": {
         "runtime": {
           "office.dll": {
@@ -1165,6 +1189,14 @@
           "MVSDK.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "stdole/7.0.3300.0": {
+        "runtime": {
+          "stdole.dll": {
+            "assemblyVersion": "7.0.3300.0",
+            "fileVersion": "7.0.9466.1"
           }
         }
       },
@@ -3167,7 +3199,17 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Newtonsoft.Json/13.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Interop.SpeechLib/5.4.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "H_Pannel_lib/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
@@ -3237,6 +3279,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "zxing/0.16.6.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "office/15.0.0.0": {
       "type": "reference",
       "serviceable": false,
@@ -3258,6 +3305,11 @@
       "sha512": ""
     },
     "MVSDK/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "stdole/7.0.3300.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

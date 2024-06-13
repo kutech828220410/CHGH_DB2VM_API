@@ -39,6 +39,9 @@ C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\app
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\med_update\App.config
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\med_update\bin\Debug\med_update.exe.config
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\med_update\bin\Release\med_update.exe.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\order_ud_update\App.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\order_ud_update\bin\Debug\order_ud_update.exe.config
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\order_ud_update\bin\Debug\order_upate_ex.exe.config
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\order_upate_ex\App.config
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\order_upate_ex\bin\Debug\order_upate_ex.exe.config
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\per_order_update\App.config
@@ -225,7 +228,9 @@ C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\NPO
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\SQLUI.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\MyUI.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\System.Management.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\Newtonsoft.Json.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\Interop.SpeechLib.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\H_Pannel_lib.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\Microsoft.Office.Interop.Excel.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\ICSharpCode.SharpZipLib.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\LadderUI.dll
@@ -239,10 +244,12 @@ C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\Lig
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\ZealTechUI.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\HCGUI.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\DrawingClass.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\zxing.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\office.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\TCP.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\CallBackUI.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\MeasureSystemFunction.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\MVSDK.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\stdole.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\DB2VM_API.Views.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\obj\Release\net5.0\PubTmp\Out\DB2VM_API.Views.pdb

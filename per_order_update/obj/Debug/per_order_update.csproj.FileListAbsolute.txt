@@ -63,3 +63,15 @@ C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\TCP.dl
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\CallBackUI.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\MeasureSystemFunction.dll
 C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\MVSDK.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\H_Pannel_lib.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\MyOffice.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\zxing.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\NPOI.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\Microsoft.Office.Interop.Excel.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\NPOI.OOXML.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\office.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\NPOI.OpenXml4Net.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\NPOI.OpenXmlFormats.dll
+C:\Users\Administrator\Downloads\DBVM_CHGH_API\per_order_update\bin\Debug\stdole.dll
